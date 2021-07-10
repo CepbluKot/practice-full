@@ -1,99 +1,111 @@
 #include <iostream>
+#include <cstdlib>
+using namespace std;
+
 
 struct Node {
-  int val;
-  Node* next;
+	int val;
+	Node* next;
+
+
 };
 
-// Инициализации элемента односвязного списка нулями
+
+
+// Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГЁ ГЅГ«ГҐГ¬ГҐГ­ГІГ  Г®Г¤Г­Г®Г±ГўГїГ§Г­Г®ГЈГ® Г±ГЇГЁГ±ГЄГ  Г­ГіГ«ГїГ¬ГЁ
 
 void init(Node* node) {
 
+	//node = (struct Node*)malloc(sizeof(struct Node)); 
+	node->val = 0;
+	node->next = NULL;
+
 }
 
-// Отображения односвязного списка на экран
+// ГЋГІГ®ГЎГ°Г Г¦ГҐГ­ГЁГї Г®Г¤Г­Г®Г±ГўГїГ§Г­Г®ГЈГ® Г±ГЇГЁГ±ГЄГ  Г­Г  ГЅГЄГ°Г Г­
+
 void show(Node* head) {
+	
+	
+	 while (head->val != NULL) {
 
+		cout << head->val << " ";
+		head = head->next;
+
+
+	}
 }
 
-// Добавления элемента в односвязный список
-void pushNode(Node* head,Node* node) {
+void pushNode(Node* head, Node* node) {
 
-} 
+int push_count=0;
+    while (head->next != NULL)
+        head = head->next;
 
-
-// Написать функцию инициализации size элементов списка заданным значением val.
-void initList(Node* head, int size, int val)  {
-
+    head->next = node;
+    node->next = NULL;
+    push_count+=1;
 }
 
-// Написать функцию копирования элементов массива source в новый массив dest
+
 void copyMas(Node* source, Node* dest) {
+	
+	while (source->next != NULL || dest->next != NULL) {
 
-}
-  
+		dest->val = source->val;
+		source = source->next;
+		dest = dest->next;
+		
 
-// Написать функцию сравнение списков source и dest. Если списки равны 0, если не равны -1
-int compareMas(Node* source, Node* dest) {
-  return 0;
-}
-
-
-// Написать функцию удаления со сдвигом влево n-го элемента списка.
-void deleteList(Node* head,int n) {
-
-}
-
-
-// Написать функцию сдвига значений вправо на n-элементов с заполнением крайних элементов нулями
-void rShiftList(Node* head,int n) {
+	}
 
 }
 
 
 
-// Написать функцию сдвига значений влево на n-элементов с заполнением крайних элементов нулями.
-void lShiftList(Node* head,int n) {
-
+int testCopyMas(){
+    Node* source = new Node;
+	Node* dest = new Node;
+	Node* source_node = source;
+	Node* dest_node = dest;
+	init(source);
+	init(dest);
+	for (int x = 1; x < 11; x++) {
+	pushNode(source, new Node);
+	source_node->val =x ;
+	source_node = source_node->next;
+}
+for (int x = 1; x < 11; x++) {
+	pushNode(dest, new Node);
+	dest_node->val =1 ;
+	dest_node = dest_node->next;
+}
+copyMas(source,dest);
+for (int x = 1; x < 11; x++) {
+	if (source->val != dest -> val){ return -1;}
+	source=source->next;
+	dest=dest->next;
+	
+}
+return 0;
+    
 }
 
 
-//Написать функцию сдвига значений влево на n-элементов с переносом вытесненных элементов в конец
-void lRoundShiftMas(Node* head,int n, int size) {
 
-}
-
-
-// Написать функцию вычисления среднего значения элементов списка.
-int averageList(Node* head, int size) {
-  return 0;
-}
-
-
-
-// Написать функцию вычисления средне квадратического отклонения элементов списка.
-int skoFromList(Node* head, int size) {
-  return 0;
-}
-
-
-int testSkoFromList() {
-  return -1;
-}
-
-
-static void runTest(int (*testFunction)(),const std::string& testName)
+static void runTest(int (*testFunction)(), const std::string& testName)
 {
-  if(testFunction()==0)
-    std::cout << "Test "<< testName << " - OK" << std::endl;
-  else 
-    std::cout << "Test "<< testName << " - FAIL" << std::endl;
+    if (testFunction() == 0)
+        std::cout << "Test " << testName << " - OK" << std::endl;
+    else
+        std::cout << "Test " << testName << " - FAIL" << std::endl;
 }
 
 
 
 int main() {
-  runTest(testSkoFromList,"testSkoFromList");
+
+	runTest(testCopyMas, "testCopyMas");
 
 
 }
