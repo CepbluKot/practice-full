@@ -16,7 +16,7 @@ int main()
         shape.setFillColor(sf::Color::Red);
         shape.setRotation(1.f+i);
         sf::Event event;
-        // че палиш
+        
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
